@@ -6,9 +6,14 @@ import time
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
+# 입력값
+prdtyear_start = "1957" # 제작년도 시작
+prdtyear_end = "1968" # 제작년도 끝
+sheet_name = "영화정보"
+
 # Google Sheet API
 scope = ['https://spreadsheets.google.com/feeds']
-json_file_name = '/Users/smyoo/prj/smyoo_test.json'
+json_file_name = '/Users/yuseungjin/prj/smyoo_test.json'
 credentials = ServiceAccountCredentials.from_json_keyfile_name(json_file_name, scope)
 gc = gspread.authorize(credentials)
 #spreadsheet_url = 'https://docs.google.com/spreadsheets/d/163aCZbPpV04HZKyFlGVp9sd2ISm5jjn0MdVDEqtnRYg/edit#gid=0' # 내꺼
@@ -38,8 +43,6 @@ def get_movie_info(prdtyear_start, prdthyear_end, items, page):
 
 # 조건을 만족하는 총 영화 건수를 가져옴
 # api 호출건당 최대 100건만 가능하므로 page수를 파악하여 호출건수 제어하기 위힘
-prdtyear_start = "1957" # 제작년도 시작
-prdtyear_end = "1968" # 제작년도 끝
 a = get_movie_info(prdtyear_start, prdtyear_end, 1, 1)
 tot_cnt = a[1]
 print(">>> 총 영화수 : {0}".format(tot_cnt))
@@ -52,7 +55,7 @@ pages=round(tot_cnt/items)
 column_cnt = 14 # 구글시트 데이터 항목 컬럼 수
 # 시트 불러오기
 doc = gc.open_by_url(spreadsheet_url)
-worksheet = doc.worksheet('영화정보')
+worksheet = doc.worksheet(sheet_name)
 # 시트 초기화
 if worksheet.row_count > 3: worksheet.delete_rows(4, worksheet.row_count)
 time.sleep(1)
