@@ -1,32 +1,32 @@
 import urllib.request as ul
 import json
 import gspread
-from oauth2client.service_account import ServiceAccountCredentials
+from oauth2client.service_account import ServiceAccountCredentials # pip install --upgrade google-api-python-client
 import time
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
 # 입력값
-prdtyear_start = "1957" # 제작년도 시작
-prdtyear_end = "1968" # 제작년도 끝
-sheet_name = "영화정보"
+prdtyear_start = "1945" # 제작년도 시작
+prdtyear_end = "1956" # 제작년도 끝
+sheet_name = "영화정보2"
 
 # Google Sheet API
 scope = ['https://spreadsheets.google.com/feeds']
-json_file_name = '/Users/yuseungjin/prj/smyoo_test.json'
+json_file_name = '/Users/seungjin/Documents/google_api/movie-20210630.json'
 credentials = ServiceAccountCredentials.from_json_keyfile_name(json_file_name, scope)
 gc = gspread.authorize(credentials)
-#spreadsheet_url = 'https://docs.google.com/spreadsheets/d/163aCZbPpV04HZKyFlGVp9sd2ISm5jjn0MdVDEqtnRYg/edit#gid=0' # 내꺼
-spreadsheet_url = 'https://docs.google.com/spreadsheets/d/11zMaVONUI8NLGAoR-pVdhw_nSOp3uAEdQVkLJPqayEY/edit?ts=5f379fb2#gid=0' # 승진이꺼
+spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1RfF4-DFF7nBZXTDfpK4O_-d3E1SWC7gZMYoR59AxvyA/edit#gid=0'
 ############################################################################
 # 영화관입장권통합전산망 오픈API 테스트
 # http://www.kobis.or.kr/kobisopenapi/homepg/main/main.do
 ############################################################################
 
 # 영화정보 가져오는 함수
-def get_movie_info(prdtyear_start, prdthyear_end, items, page):
+def get_movie_info(prdtyear_start, prdtyear_end, items, page):
     key = "7d6adcbd79ec916a9d400b3f76f3ddfd"
     url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key={0}&prdtStartYear={1}&prdtEndYear={2}&itemPerPage={3}&curPage={4}".format(key, prdtyear_start, prdtyear_end, items, page)
+    # url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key={0}&prdtStartYear={1}&prdtEndYear={2}&itemPerPage={3}&curPage={4}".format(key, prdtyear_start, prdtyear_end, items, page)
     request = ul.Request(url)
     response = ul.urlopen(request)
     rescode = response.getcode()
@@ -63,7 +63,7 @@ tot_items = 0
 for page in range(1, pages+1):
     print('>>> [INFO] Get Movie Info (page:{0})'.format(page))
     r = get_movie_info(prdtyear_start, prdtyear_end, items, page)
-    movie_list = []
+    movie_list = []   # 리스트를 초기화하는 이유 : for 문을 실행하면서 기존에 있던 리스트를 지우고 새로운 영화 정보를 넣기 위해서. 
     for m in r[0]:
         tot_items = tot_items + 1
         movie_list.append(
