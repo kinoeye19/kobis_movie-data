@@ -12,10 +12,11 @@ prdtyear_end = "1969" # 제작년도 끝
 sheet_name = "movie_info_1960s"
 
 # Google Sheet API
+# 연습 
 scope = ['https://spreadsheets.google.com/feeds']
 json_file_name = '/Users/seungjin/Documents/google_api/movie-20210630.json'
 credentials = ServiceAccountCredentials.from_json_keyfile_name(json_file_name, scope)
-gc = gspread.authorize(credentials)
+gc = gspread.authorize(credentials) 
 spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1RfF4-DFF7nBZXTDfpK4O_-d3E1SWC7gZMYoR59AxvyA/edit#gid=0'
 ############################################################################
 # 영화관입장권통합전산망 오픈API 테스트
