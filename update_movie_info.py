@@ -8,8 +8,8 @@ pp = pprint.PrettyPrinter(indent=4)
 
 # 입력값
 prdtyear_start = "1960" # 제작년도 시작
-prdtyear_end = "1969" # 제작년도 끝
-sheet_name = "movie_info_1960s"
+prdtyear_end = "1961" # 제작년도 끝
+sheet_name = "c"
 
 # Google Sheet API
 # 연습 
@@ -36,18 +36,19 @@ def get_movie_info(prdtyear_start, prdtyear_end, items, page):
         print(">>>> [Success] Result Code : {0}".format(rescode))
     else:
         print(">>>> [Fail] Result Code : {0}".format(rescode))
-    result = json.loads(data)
+    result = json.loads(data) 
+    pp.pprint(result)
     movie_list = result['movieListResult']['movieList']
     tot_cnt = result['movieListResult']['totCnt']
     return [movie_list, tot_cnt]
 
 
 # 조건을 만족하는 총 영화 건수를 가져옴
-# api 호출건당 최대 100건만 가능하므로 page수를 파악하여 호출건수 제어하기 위힘
+# api 호출건당 최대 100건만 가능하므로 page수를 파악하여 호출건수 제어하기 위함 (토탈 카운터를 알아야 호출할 페이지를 알아야 함 가져오기 위함)
 a = get_movie_info(prdtyear_start, prdtyear_end, 1, 1)
 tot_cnt = a[1]
 print(">>> 총 영화수 : {0}".format(tot_cnt))
-print('--------------------------\n')
+print('--------------------------\n') 
 
 # 조건을 만족하는 전체 영화데이터 가져옴.
 # 한번에 100건씩 pages 만큼 호출
