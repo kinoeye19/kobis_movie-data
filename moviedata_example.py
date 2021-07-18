@@ -45,7 +45,7 @@ def get_movie_info(prdtyear_start, prdtyear_end, items, page):
 a = get_movie_info(prdtyear_start, prdtyear_end, 1, 1)
 tot_cnt = a[1]
 print(">>> 총 영화수 : {0}".format(tot_cnt))
-print('--------------------------\n')
+print('--------------------------\n') 
 
 # 조건을 만족하는 전체 영화데이터 가져옴.
 # 한번에 100건씩 pages 만큼 호출
