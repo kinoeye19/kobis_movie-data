@@ -6,8 +6,8 @@ import pprint
 import time
 import math
 
-prodStartYear ='1958'
-prodEndYear = '1959'
+prodStartYear ='1960'
+prodEndYear = '1961'
 sheetname = 'kmdb_mv_censor_list_kor'
 
 
@@ -42,7 +42,7 @@ column_cnt = 5 # 구글시트 데이터 항목 컬럼 수
 doc = gc.open_by_url(spreadsheet_url)
 worksheet = doc.worksheet(sheetname)
 
-if worksheet.row_count > 2: worksheet.delete_rows(3, worksheet.row_count)
+# if worksheet.row_count > 2: worksheet.delete_rows(3, worksheet.row_count)
 time.sleep(2)
 tot_items = 0
 for startCount in range(0, startCounts+10, 10):
