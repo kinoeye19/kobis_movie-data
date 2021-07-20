@@ -37,7 +37,7 @@ def get_movie_info(prdtyear_start, prdtyear_end, items, page):
     else:
         print(">>>> [Fail] Result Code : {0}".format(rescode))
     result = json.loads(data) 
-    pp.pprint(result)
+    # pp.pprint(result)
     movie_list = result['movieListResult']['movieList']
     tot_cnt = result['movieListResult']['totCnt']
     return [movie_list, tot_cnt]
@@ -65,10 +65,10 @@ tot_items = 0
 for page in range(1, pages+1):
     print('>>> [INFO] Get Movie Info (page:{0})'.format(page))
     r = get_movie_info(prdtyear_start, prdtyear_end, items, page)
-    movie_list = []   # 리스트를 초기화하는 이유 : for 문을 실행하면서 기존에 있던 리스트를 지우고 새로운 영화 정보를 넣기 위해서. 
+    movie_info_list = []   
     for m in r[0]:
         tot_items = tot_items + 1
-        movie_list.append(
+        movie_info_list.append(
             [
                 m['movieCd'],
                 m['movieNm'],
@@ -92,7 +92,7 @@ for page in range(1, pages+1):
         'directors': [{'peopleNm': '신상옥'}],
     """
     #pp.pprint(movie_list)
-    worksheet.append_rows(movie_list)
+    worksheet.append_rows(movie_info_list)
     time.sleep(2)
     print(">>> [INFO] Upload Completed ... {0}/{1}\n".format(tot_items, tot_cnt))
 
