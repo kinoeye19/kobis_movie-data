@@ -12,7 +12,6 @@ prdtyear_end = "1961" # 제작년도 끝
 sheet_name = "c"
 
 # Google Sheet API
-# 연습 
 scope = ['https://spreadsheets.google.com/feeds']
 json_file_name = '/Users/seungjin/Documents/google_api/movie-20210630.json'
 credentials = ServiceAccountCredentials.from_json_keyfile_name(json_file_name, scope)
@@ -50,16 +49,20 @@ tot_cnt = a[1]
 print(">>> 총 영화수 : {0}".format(tot_cnt))
 print('--------------------------\n') 
 
-# 조건을 만족하는 전체 영화데이터 가져옴.
-# 한번에 100건씩 pages 만큼 호출
-items=100 # 페이지당 데이터 수
-pages=round(tot_cnt/items)
-column_cnt = 14 # 구글시트 데이터 항목 컬럼 수
 # 시트 불러오기
 doc = gc.open_by_url(spreadsheet_url)
 worksheet = doc.worksheet(sheet_name)
 # 시트 초기화
 if worksheet.row_count > 3: worksheet.delete_rows(4, worksheet.row_count)
+
+
+# 조건을 만족하는 전체 영화데이터 가져옴.
+# 한번에 100건씩 pages 만큼 호출
+items=100 # 페이지당 데이터 수
+pages=round(tot_cnt/items)
+column_cnt = 14 # 구글시트 데이터 항목 컬럼 수
+
+
 time.sleep(1)
 tot_items = 0
 for page in range(1, pages+1):
