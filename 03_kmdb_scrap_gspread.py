@@ -34,15 +34,15 @@ startCounts = math.floor(int(items_cntNum)/10)*10
 print(">>> startCount 최대값 = {0}".format(startCounts))
 print('--------------------------\n')
 
+doc = gc.open_by_url(spreadsheet_url)
+worksheet = doc.worksheet(sheetname)
+
+# if worksheet.row_count > 2: worksheet.delete_rows(3, worksheet.row_count)
 
 items = 100 # 페이지당 데이터 수
 pages = math.ceil(startCounts/items)
 column_cnt = 5 # 구글시트 데이터 항목 컬럼 수
 
-doc = gc.open_by_url(spreadsheet_url)
-worksheet = doc.worksheet(sheetname)
-
-# if worksheet.row_count > 2: worksheet.delete_rows(3, worksheet.row_count)
 time.sleep(2)
 tot_items = 0
 for startCount in range(0, startCounts+10, 10):
