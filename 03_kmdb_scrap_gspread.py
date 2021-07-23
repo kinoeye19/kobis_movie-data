@@ -6,8 +6,8 @@ import pprint
 import time
 import math
 
-prodStartYear ='1960'
-prodEndYear = '1961'
+prodStartYear ='1962'
+prodEndYear = '1963'
 sheetname = 'kmdb_mv_censor_list_kor'
 
 
