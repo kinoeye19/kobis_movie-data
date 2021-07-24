@@ -7,9 +7,9 @@ import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
 # 입력값
-prdtyear_start = "1930" # 제작년도 시작
-prdtyear_end = "1939" # 제작년도 끝
-sheet_name = "movie_info_1930s"
+prdtyear_start = "1958" # 제작년도 시작
+prdtyear_end = "1959" # 제작년도 끝
+sheet_name = "example_01"
 
 # Google Sheet API
 scope = ['https://spreadsheets.google.com/feeds']
@@ -26,7 +26,6 @@ spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1RfF4-DFF7nBZXTDfpK4O_
 def get_movie_info(prdtyear_start, prdtyear_end, items, page):
     key = "7d6adcbd79ec916a9d400b3f76f3ddfd"
     url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key={0}&prdtStartYear={1}&prdtEndYear={2}&itemPerPage={3}&curPage={4}".format(key, prdtyear_start, prdtyear_end, items, page)
-    # url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key={0}&prdtStartYear={1}&prdtEndYear={2}&itemPerPage={3}&curPage={4}".format(key, prdtyear_start, prdtyear_end, items, page)
     request = ul.Request(url)
     response = ul.urlopen(request)
     rescode = response.getcode()
@@ -43,7 +42,7 @@ def get_movie_info(prdtyear_start, prdtyear_end, items, page):
 
 
 # 조건을 만족하는 총 영화 건수를 가져옴
-# api 호출건당 최대 100건만 가능하므로 page수를 파악하여 호출건수 제어하기 위함 (토탈 카운터를 알아야 호출할 페이지를 알아야 함 가져오기 위함)
+# api 호출건당 최대 100건만 가능하므로 page수를 파악하여 호출건수 제어하기 위함
 a = get_movie_info(prdtyear_start, prdtyear_end, 1, 1)
 tot_cnt = a[1]
 print(">>> 총 영화수 : {0}".format(tot_cnt))

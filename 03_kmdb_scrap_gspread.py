@@ -6,9 +6,9 @@ import pprint
 import time
 import math
 
-prodStartYear ='1962'
-prodEndYear = '1963'
-sheetname = 'kmdb_mv_censor_list_kor'
+prodStartYear ='1958'
+prodEndYear = '1959'
+sheetname = 'example_censorship'
 
 
 scope = ['https://spreadsheets.google.com/feeds']
@@ -37,7 +37,7 @@ print('--------------------------\n')
 doc = gc.open_by_url(spreadsheet_url)
 worksheet = doc.worksheet(sheetname)
 
-# if worksheet.row_count > 2: worksheet.delete_rows(3, worksheet.row_count)
+if worksheet.row_count > 2: worksheet.delete_rows(3, worksheet.row_count)
 
 items = 100 # 페이지당 데이터 수
 pages = math.ceil(startCounts/items)
