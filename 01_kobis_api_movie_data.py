@@ -7,9 +7,9 @@ import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
 # 입력값
-prdtyear_start = "1958" # 제작년도 시작
+prdtyear_start = "1950" # 제작년도 시작
 prdtyear_end = "1959" # 제작년도 끝
-sheet_name = "example_01"
+sheet_name = "movie_info_1950s"
 
 # Google Sheet API
 scope = ['https://spreadsheets.google.com/feeds']
